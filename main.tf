@@ -13,7 +13,7 @@ data "aws_vpc" "primary-vpc" {
 }
 
 resource "aws_security_group" "jenkins-server-sg" {
-    name = "jenkins-server-sg"
+    name = "jenkins-server-sg-1"
     description = "Jenkins server security group"
     vpc_id = data.aws_vpc.primary-vpc.id
 
