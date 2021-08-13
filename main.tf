@@ -1,4 +1,10 @@
 variable "aws_region" { }
+variable "prefix" { }
+variable "owner" { }
+variable "se-region" { }
+variable "purpose" { }
+variable "ttl" { }
+variable "terraform" { }
 
 provider "aws" {
     region = var.aws_region
@@ -39,6 +45,15 @@ resource "aws_security_group" "jenkins-server-sg" {
         to_port = 0
         protocol = "-1"
         cidr_blocks = ["0.0.0.0/0"]
+    }
+
+    tags = {
+        Name = "${var.prefix}-jenkins-demo"
+        owner = var.owner
+        se-region = var.se-region
+        purpose = var.purpose
+        ttl = var.ttl
+        terraform = var.terraform
     }
 }
 
