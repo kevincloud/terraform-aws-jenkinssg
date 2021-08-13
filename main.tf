@@ -1,4 +1,5 @@
 variable "aws_region" { }
+variable "vpcid" { }
 variable "prefix" { }
 variable "owner" { }
 variable "se-region" { }
@@ -10,14 +11,10 @@ provider "aws" {
     region = var.aws_region
 }
 
-data "aws_vpc" "primary-vpc" {
-    default = true
-}
-
 resource "aws_security_group" "jenkins-server-sg" {
     name = "jenkins-server-sg"
     description = "Jenkins server security group"
-    vpc_id = data.aws_vpc.primary-vpc.id
+    vpc_id = var.vpcid
 
     ingress {
         from_port = 22
